@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Navigation = () => {
-  return ( // dim: hover
+  return ( // .f3 { font-size: 1.5rem; }; dim: hover
     <nav style={{display: 'flex', justifyContent: 'flex-end'}}>
       <p className='f3 link dim black underline pa3 pointer'>Sign Out</p>
     </nav>
