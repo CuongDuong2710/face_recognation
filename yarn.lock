@@ -6708,6 +6708,10 @@ react-error-overlay@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.1.0.tgz#c516995a5652e7bfbed8b497910d5280df74a7e8"
 
+react-particles-js@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-particles-js/-/react-particles-js-2.4.0.tgz#8c95dafb6e9bcf392c96dd30888e76001c748ed3"
+
 react-scripts@2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/react-scripts/-/react-scripts-2.1.1.tgz#c2959a756b0b61d3090adece0d7aedd324dff8a5"
