@@ -42,11 +42,11 @@ class App extends Component {
     this.setState({imageUrl: input})
 
     app.models.predict(
-      Clarifai.COLOR_MODEL,
+      Clarifai.FACE_DETECT_MODEL,
       this.state.input) // this.state.imageURL -> error
       .then(
     function(response) {
-      console.log(response)
+      console.log(response.outputs[0].data.regions[0].region_info.bounding_box);
     },
     function(err) {
       // there was an error
