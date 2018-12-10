@@ -9,3 +9,5 @@ One way to go around this issue is to use a callback function:
 setState(updater, callback)
 
 Read about it more here (https://reactjs.org/docs/react-component.html#setstate)
+
+1 rem = 16px
