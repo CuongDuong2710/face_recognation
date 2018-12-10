@@ -11,3 +11,17 @@ setState(updater, callback)
 Read about it more here (https://reactjs.org/docs/react-component.html#setstate)
 
 1 rem = 16px
+
+// ERROR
+
+If we're coding:
+
++ onClick={onRouteChange('signin')} // Navigation component
+
+Output: Maximum update depth exceeded. This can happen when a component repeatedly calls setState inside componentWillUpdate or componentDidUpdate. 
+React limits the number of nested updates to prevent infinite loops.
+
+=> we don't want to actually run this function. We want it to run whenever 'onClick' happens => using arrow function.
+ 
++ onClick={() => onRouteChange('signin)}
+
