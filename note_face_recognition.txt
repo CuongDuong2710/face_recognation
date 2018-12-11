@@ -25,3 +25,8 @@ React limits the number of nested updates to prevent infinite loops.
  
 + onClick={() => onRouteChange('signin)}
 
+-------------------------
+Difference call function with parentheses/ without parentheses
+
+https://stackoverflow.com/questions/3246928/in-javascript-does-it-make-a-difference-if-i-call-a-function-with-parentheses
+
