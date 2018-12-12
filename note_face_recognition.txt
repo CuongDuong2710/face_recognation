@@ -40,6 +40,17 @@ If an opaque response serves your needs, set the request's mode to 'no-cors' to 
 
 => Chrome doesn't really trust whatever we're accessing here.
 
+Install CORS
 CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+
+Q&A
+1. Are CORS requests blocked by the server? or by the browser? if we installing cors in the backend that means we are telling 
+the server to accept the cors requests and chrome is a silent spectator in this realm?
+
+2. The server is responsible for reporting the allowed origins. The web browser is responsible for enforcing that requests are only sent from allowed domains.
+
+
+    
+
 
 
