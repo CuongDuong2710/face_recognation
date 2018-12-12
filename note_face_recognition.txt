@@ -30,3 +30,16 @@ Difference call function with parentheses/ without parentheses
 
 https://stackoverflow.com/questions/3246928/in-javascript-does-it-make-a-difference-if-i-call-a-function-with-parentheses
 
+
+-------------------------
+Connect back-end to front-end
+
+Failed to load http://localhost:3000/: No 'Access-Control-Allow-Origin' header is present on the requested resource. 
+Origin 'http://localhost:3001' is therefore not allowed access. 
+If an opaque response serves your needs, set the request's mode to 'no-cors' to fetch the resource with CORS disabled.
+
+=> Chrome doesn't really trust whatever we're accessing here.
+
+CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
+
+
