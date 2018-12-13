@@ -104,8 +104,16 @@ class App extends Component {
     })
   }
 
+  loadInfo = (user) => {
+    const { name, entries } = user
+    this.setState({
+      name,
+      entries
+    })
+  }
+
   render() {
-    const { isSignedIn, imageUrl, box, route, name } = this.state;
+    const { isSignedIn, imageUrl, box, route, name, entries } = this.state;
     return (
       <div className="App">
       <Particles className='particles'
@@ -117,7 +125,7 @@ class App extends Component {
           ( 
             <div>
               <Logo />
-              <Rank name={name} />
+              <Rank name={name} entries={entries}/>
               <ImageLinkForm 
                 onInputChange={this.onInputChange} 
                 onButtonSubmit={this.onButtonSubmit} />
@@ -127,7 +135,7 @@ class App extends Component {
           :
           (
             this.state.route === 'signin'
-            ? <SignIn onRouteChange={this.onRouteChange} />
+            ? <SignIn loadInfo={this.loadInfo} onRouteChange={this.onRouteChange} />
             : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
         }
