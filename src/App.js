@@ -34,12 +34,14 @@ class App extends Component {
       box: {},
       route: 'signin',
       isSignedIn: false,
-      id: '',
-      name: '',
-      email: '',
-      password: '',
-      entries: 0,
-      joined: ''
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        password: '',
+        entries: 0,
+        joined: ''
+      }
     }
   }
 
@@ -72,14 +74,38 @@ class App extends Component {
   }
 
   onButtonSubmit = () => {
-    const { input } = this.state;
+    const { input, user } = this.state;
 
     this.setState({imageUrl: input})
 
     app.models.predict(
       Clarifai.FACE_DETECT_MODEL,
       this.state.input) // this.state.imageURL -> error
-      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .then(response => {
+        // console.log('response', response)
+        console.log('user', user)
+        if (response) {
+          fetch('http://localhost:3000/image', {
+            method: 'put',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              id: user.id,
+            })
+          })
+          .then(response => response.json())
+          .then(entries => {
+            this.setState(
+              Object.assign(this.state.user, { entries })
+              /* {
+              user: {
+                entries
+              }
+              } */
+            )
+          })
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response))
+      })
       .catch(err => console.log(err))
   }
 
@@ -95,25 +121,35 @@ class App extends Component {
   loadUser = (user) => {
     const { id, name, email, password, entries, joined } = user
     this.setState({
-      id,
-      name,
-      email,
-      password,
-      entries,
-      joined
+      user: {
+        id,
+        name,
+        email,
+        password,
+        entries,
+        joined
+      }
     })
   }
 
   loadInfo = (user) => {
-    const { name, entries } = user
+    const { id, name, email, password, entries, joined } = user
     this.setState({
-      name,
-      entries
+      user: {
+        id,
+        name,
+        email,
+        password,
+        entries,
+        joined
+      }
     })
   }
 
   render() {
-    const { isSignedIn, imageUrl, box, route, name, entries } = this.state;
+    const { isSignedIn, imageUrl, box, route, user } = this.state
+    const { name, entries } = user
+
     return (
       <div className="App">
       <Particles className='particles'
