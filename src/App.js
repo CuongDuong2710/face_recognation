@@ -94,14 +94,26 @@ class App extends Component {
           })
           .then(response => response.json())
           .then(entries => {
+
             this.setState(
               Object.assign(this.state.user, { entries })
-              /* {
-              user: {
-                entries
-              }
-              } */
             )
+
+            /* // Second solution
+            const user = {...this.state.user}
+            user.entries = entries
+            this.setState({ user }) */
+
+            /* // Three solution
+            const user = Object.assign(this.state.user, { entries })
+            this.setState({ user }) */
+
+            /* // Error
+            {
+            user: {
+              entries // user only has 'entries' properties
+            }
+            } */
           })
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
