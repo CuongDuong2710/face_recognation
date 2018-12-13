@@ -36,6 +36,7 @@ class Register extends React.Component {
     .then(response => response.json())
     .then(user => {
       if (user) {
+        this.props.loadUser(user)
         this.props.onRouteChange('home')
       }
     })
@@ -50,8 +51,8 @@ class Register extends React.Component {
                 <legend className="f1 fw6 ph0 mh0">Register</legend>
                 <div className="mt3">
                   <label className="db fw6 lh-copy f6" htmlFor="name">Name</label>
-                  <input 
-                    onClick={this.onNameChange}
+                  <input
+                    onChange={this.onNameChange}
                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                     type="text" 
                     name="name"
@@ -60,7 +61,7 @@ class Register extends React.Component {
                 <div className="mt3">
                   <label className="db fw6 lh-copy f6" htmlFor="email-address">Email</label>
                   <input 
-                    onClick={this.onEmailChange}
+                    onChange={this.onEmailChange}
                     className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                     type="email" 
                     name="email-address" 
@@ -69,7 +70,7 @@ class Register extends React.Component {
                 <div className="mv3">
                   <label className="db fw6 lh-copy f6" htmlFor="password">Password</label>
                   <input 
-                    onClick={this.onPasswordChange}
+                    onChange={this.onPasswordChange}
                     className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" 
                     type="password" 
                     name="password" 
