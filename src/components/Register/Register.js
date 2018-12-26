@@ -40,7 +40,7 @@ class Register extends React.Component {
         POST http://localhost:3000/register 400 (Bad Request)
         Register.js:38 user incorrect form submission 
       */
-      if (user) {
+      if (user.id) {
         this.props.loadUser(user)
         this.props.onRouteChange('home')
       }
