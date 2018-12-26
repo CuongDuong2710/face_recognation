@@ -8,11 +8,6 @@ import Register from './components/Register/Register';
 import SignIn from './components/SignIn/SignIn';
 import './App.css';
 import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-
-const app = new Clarifai.App({
-  apiKey: '00126a3710ee46089b2068afeff3fdfd'
- });
 
 const particleOptions = {
   particles: {
@@ -67,7 +62,7 @@ class App extends Component {
   }
 
   displayFaceBox = (box) => {
-    console.log(box);
+    console.log('box', box);
     this.setState({box: box});
   }
 
@@ -80,47 +75,52 @@ class App extends Component {
 
     this.setState({imageUrl: input})
 
-    app.models.predict(
-      Clarifai.FACE_DETECT_MODEL,
-      this.state.input) // this.state.imageURL -> error
-      .then(response => {
-        // console.log('response', response)
-        console.log('user', user)
-        if (response) {
-          fetch('http://localhost:3000/image', {
-            method: 'put',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-              id: user.id,
-            })
-          })
-          .then(response => response.json())
-          .then(entries => {
-
-            this.setState(
-              Object.assign(this.state.user, { entries })
-            )
-
-            /* // Second solution
-            const user = {...this.state.user}
-            user.entries = entries
-            this.setState({ user }) */
-
-            /* // Three solution
-            const user = Object.assign(this.state.user, { entries })
-            this.setState({ user }) */
-
-            /* // Error
-            {
-            user: {
-              entries // user only has 'entries' properties
-            }
-            } */
-          })
-        }
-        this.displayFaceBox(this.calculateFaceLocation(response))
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        input
       })
-      .catch(err => console.log(err))
+    })
+    .then(response => response.json())
+    .then(response => {
+      // console.log('response', response)
+      console.log('user', user)
+      if (response) {
+        fetch('http://localhost:3000/image', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            id: user.id,
+          })
+        })
+        .then(response => response.json())
+        .then(entries => {
+
+          this.setState(
+            Object.assign(this.state.user, { entries })
+          )
+
+          /* // Second solution
+          const user = {...this.state.user}
+          user.entries = entries
+          this.setState({ user }) */
+
+          /* // Three solution
+          const user = Object.assign(this.state.user, { entries })
+          this.setState({ user }) */
+
+          /* // Error
+          {
+          user: {
+            entries // user only has 'entries' properties
+          }
+          } */
+        })
+      }
+      this.displayFaceBox(this.calculateFaceLocation(response))
+    })
+    .catch(err => console.log(err))
   }
 
   onRouteChange = (route) => {
