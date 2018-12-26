@@ -35,6 +35,11 @@ class Register extends React.Component {
     })
     .then(response => response.json())
     .then(user => {
+      console.log('user', user)
+      /* empty name/email/password: still route to home screen
+        POST http://localhost:3000/register 400 (Bad Request)
+        Register.js:38 user incorrect form submission 
+      */
       if (user) {
         this.props.loadUser(user)
         this.props.onRouteChange('home')
